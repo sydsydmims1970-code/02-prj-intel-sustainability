@@ -1,1 +1,590 @@
-/* Add your CSS here */
+/* ========================================
+   INTEL SUSTAINABILITY TIMELINE STYLES
+   ======================================== */
+
+/* Root variables for easy theming and reusability */
+:root {
+  /* Intel brand colors */
+  --intel-blue: #0071C5;
+  --intel-blue-dark: #003A70;
+  --intel-blue-light: #E8F4FF;
+  
+  /* Neutral colors */
+  --dark-text: #1a1a1a;
+  --light-text: #ffffff;
+  --gray-border: #e0e0e0;
+  --gray-bg: #f5f5f5;
+  
+  /* Spacing */
+  --spacing-xs: 8px;
+  --spacing-sm: 16px;
+  --spacing-md: 24px;
+  --spacing-lg: 32px;
+  --spacing-xl: 48px;
+  
+  /* Transitions */
+  --transition-fast: 0.2s ease-in-out;
+  --transition-smooth: 0.4s ease-in-out;
+  --transition-slow: 0.6s ease-in-out;
+}
+
+/* ========================================
+   GLOBAL STYLES
+   ======================================== */
+
+* {
+  /* Reset default margins and padding */
+  margin: 0;
+  padding: 0;
+  /* Include padding and border in element width/height calculations */
+  box-sizing: border-box;
+}
+
+body {
+  /* Clean, modern font stack */
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  line-height: 1.6;
+  color: var(--dark-text);
+  background-color: #ffffff;
+  /* Prevent horizontal scrollbar on short pages */
+  overflow-x: hidden;
+}
+
+/* ========================================
+   HERO SECTION
+   ======================================== */
+
+.hero {
+  /* Position relative for overlay positioning */
+  position: relative;
+  
+  /* Gradient background using Intel blue shades */
+  background: linear-gradient(135deg, var(--intel-blue) 0%, var(--intel-blue-dark) 100%);
+  
+  /* Full viewport height on desktop, flexible on mobile */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  
+  /* Padding for content spacing */
+  padding: var(--spacing-xl);
+  text-align: center;
+  
+  /* Add subtle shadow at bottom for depth */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  
+  /* Create text contrast with overlay */
+  color: var(--light-text);
+}
+
+/* Semi-transparent dark overlay for better text contrast */
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  /* Don't obscure interactivity */
+  pointer-events: none;
+}
+
+/* Hero content container */
+.hero-content {
+  /* Layer content above overlay */
+  position: relative;
+  z-index: 1;
+  /* Allow content to scale on mobile */
+  max-width: 800px;
+}
+
+/* Intel logo styling */
+.logo {
+  /* Responsive sizing */
+  width: 120px;
+  height: auto;
+  margin-bottom: var(--spacing-lg);
+  
+  /* Smooth animation on page load */
+  animation: fadeInDown 0.8s ease-out;
+}
+
+/* Main hero title */
+.hero-title {
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin-bottom: var(--spacing-md);
+  letter-spacing: -1px;
+  
+  /* Subtle text shadow for depth */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  
+  /* Animation */
+  animation: fadeInUp 0.8s ease-out 0.2s both;
+}
+
+/* Hero subtitle */
+.hero-subtitle {
+  font-size: 1.25rem;
+  line-height: 1.8;
+  margin-bottom: 0;
+  opacity: 0.95;
+  
+  /* Animation */
+  animation: fadeInUp 0.8s ease-out 0.4s both;
+}
+
+/* ========================================
+   TIMELINE SECTION
+   ======================================== */
+
+.timeline-section {
+  padding: var(--spacing-xl) var(--spacing-md);
+  background-color: var(--gray-bg);
+  /* Ensure section stretches to full width */
+  width: 100%;
+}
+
+/* Timeline container - horizontal scroll on desktop, vertical on mobile */
+.timeline-container {
+  /* Flexbox for card layout */
+  display: flex;
+  
+  /* Arrange items horizontally on desktop */
+  flex-direction: row;
+  
+  /* Wrap cards on smaller screens */
+  flex-wrap: wrap;
+  
+  /* Allow horizontal scrolling on desktop */
+  overflow-x: auto;
+  overflow-y: hidden;
+  
+  /* Smooth scrolling behavior */
+  scroll-behavior: smooth;
+  
+  /* Space cards evenly */
+  gap: var(--spacing-md);
+  
+  /* Center cards vertically when wrapped */
+  align-items: flex-start;
+  
+  /* Padding for breathing room */
+  padding: var(--spacing-lg) 0;
+  
+  /* Hide scrollbar but allow scrolling (webkit browsers) */
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Hide scrollbar while allowing scroll */
+.timeline-container::-webkit-scrollbar {
+  height: 8px;
+}
+
+.timeline-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.timeline-container::-webkit-scrollbar-thumb {
+  background: var(--intel-blue);
+  border-radius: 4px;
+}
+
+.timeline-container::-webkit-scrollbar-thumb:hover {
+  background: var(--intel-blue-dark);
+}
+
+/* ========================================
+   TIMELINE CARD STYLES
+   ======================================== */
+
+/* Individual timeline card */
+.timeline-card {
+  /* Fixed width for consistent card size */
+  min-width: 280px;
+  width: 280px;
+  height: 380px;
+  
+  /* Flexbox for internal layout */
+  display: flex;
+  flex-direction: column;
+  
+  /* Rounded corners for modern look */
+  border-radius: 12px;
+  
+  /* White background for contrast */
+  background-color: var(--light-text);
+  
+  /* Subtle shadow for depth */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  
+  /* Smooth transitions for hover effects */
+  transition: 
+    transform var(--transition-smooth),
+    box-shadow var(--transition-smooth),
+    background-color var(--transition-smooth);
+  
+  /* Overflow hidden to hide content when flipping */
+  overflow: hidden;
+}
+
+/* Hover state - lift card and enhance shadow */
+.timeline-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 12px 24px rgba(0, 71, 197, 0.2);
+  background-color: var(--intel-blue-light);
+}
+
+/* Image container - fixed height, responsive */
+.card-image-container {
+  width: 100%;
+  height: 180px;
+  overflow: hidden;
+  background-color: var(--gray-bg);
+  
+  /* Display image with proper alignment */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Card images - responsive and cover container */
+.card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  
+  /* Smooth zoom on hover */
+  transition: transform var(--transition-smooth);
+}
+
+/* Zoom image on card hover */
+.timeline-card:hover .card-image {
+  transform: scale(1.1);
+}
+
+/* Card content wrapper */
+.card-content {
+  /* Flex layout for content stacking */
+  display: flex;
+  flex-direction: column;
+  
+  /* Fill remaining space */
+  flex: 1;
+  padding: var(--spacing-md);
+  
+  /* Smooth content transitions */
+  transition: all var(--transition-smooth);
+  
+  /* Position relative for flip effect positioning */
+  position: relative;
+}
+
+/* Front of card (always visible by default) */
+.card-front {
+  /* Flex center content */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  
+  /* Full height of parent */
+  height: 100%;
+  
+  /* Center text */
+  text-align: center;
+  
+  /* Transition for smooth appearance/disappearance */
+  transition: opacity var(--transition-smooth), transform var(--transition-smooth);
+  
+  /* Opacity at default state */
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Back of card (hidden by default, revealed on hover) */
+.card-back {
+  /* Position absolutely over the front */
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  
+  /* Flex center for content alignment */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  /* Fill space */
+  padding: var(--spacing-md);
+  
+  /* Intel blue background for contrast */
+  background-color: var(--intel-blue);
+  color: var(--light-text);
+  
+  /* Start hidden and positioned below */
+  opacity: 0;
+  transform: translateY(20px);
+  
+  /* Smooth transition */
+  transition: opacity var(--transition-smooth), transform var(--transition-smooth);
+  
+  /* Allow pointer events */
+  pointer-events: none;
+}
+
+/* Show back content on hover */
+.timeline-card:hover .card-front {
+  opacity: 0;
+  transform: translateY(-20px);
+}
+
+.timeline-card:hover .card-back {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Year styling - large and prominent */
+.card-year {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--intel-blue);
+  margin-bottom: var(--spacing-xs);
+  
+  /* Animation on card load */
+  animation: slideIn 0.6s ease-out;
+}
+
+/* Card title styling */
+.card-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--dark-text);
+  line-height: 1.4;
+  
+  /* Animation */
+  animation: slideIn 0.6s ease-out 0.1s both;
+}
+
+/* Card description - shown on hover */
+.card-description {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--light-text);
+  
+  /* Allow text wrapping */
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* ========================================
+   HELPER TEXT
+   ======================================== */
+
+.timeline-hint {
+  text-align: center;
+  font-size: 0.95rem;
+  color: #666;
+  margin-top: var(--spacing-lg);
+  animation: fadeIn 1s ease-out 0.8s both;
+}
+
+/* ========================================
+   ANIMATIONS
+   ======================================== */
+
+/* Fade in from top */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Fade in from bottom */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Simple fade in */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Slide in from left */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* ========================================
+   RESPONSIVE DESIGN - TABLET
+   ======================================== */
+
+@media (max-width: 1024px) {
+  /* Adjust hero title on smaller screens */
+  .hero-title {
+    font-size: 2.5rem;
+  }
+  
+  /* Adjust card width for tablet */
+  .timeline-card {
+    min-width: 260px;
+    width: 260px;
+    height: 360px;
+  }
+  
+  /* Adjust spacing */
+  .timeline-section {
+    padding: var(--spacing-lg) var(--spacing-sm);
+  }
+}
+
+/* ========================================
+   RESPONSIVE DESIGN - MOBILE
+   ======================================== */
+
+@media (max-width: 768px) {
+  /* Adjust root variables for mobile */
+  :root {
+    --spacing-xl: 24px;
+    --spacing-lg: 20px;
+  }
+  
+  /* Hero section adjustments */
+  .hero {
+    min-height: auto;
+    padding: var(--spacing-lg) var(--spacing-sm);
+  }
+  
+  /* Smaller logo on mobile */
+  .logo {
+    width: 80px;
+    margin-bottom: var(--spacing-md);
+  }
+  
+  /* Responsive hero title */
+  .hero-title {
+    font-size: 2rem;
+    margin-bottom: var(--spacing-sm);
+  }
+  
+  /* Responsive subtitle */
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+  
+  /* Timeline section on mobile */
+  .timeline-section {
+    padding: var(--spacing-lg) var(--spacing-sm);
+  }
+  
+  /* Stack cards vertically on mobile instead of horizontal scroll */
+  .timeline-container {
+    flex-direction: column;
+    align-items: center;
+    overflow-x: visible;
+    overflow-y: visible;
+  }
+  
+  /* Make cards full width on mobile with max constraint */
+  .timeline-card {
+    min-width: 100%;
+    width: 100%;
+    max-width: 320px;
+    height: auto;
+    min-height: 300px;
+  }
+  
+  /* Adjust card year size on mobile */
+  .card-year {
+    font-size: 2rem;
+  }
+  
+  /* Make helper text more prominent on mobile */
+  .timeline-hint {
+    font-size: 0.9rem;
+    margin-top: var(--spacing-md);
+  }
+}
+
+/* ========================================
+   RESPONSIVE DESIGN - SMALL MOBILE
+   ======================================== */
+
+@media (max-width: 480px) {
+  /* Very small hero on tiny screens */
+  .hero-title {
+    font-size: 1.5rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 0.95rem;
+  }
+  
+  .logo {
+    width: 60px;
+  }
+  
+  /* Tighter card on very small screens */
+  .timeline-card {
+    max-width: 100%;
+  }
+  
+  .card-year {
+    font-size: 1.75rem;
+  }
+  
+  .card-title {
+    font-size: 1rem;
+  }
+  
+  .card-description {
+    font-size: 0.9rem;
+  }
+}
+
+/* ========================================
+   FOOTER
+   ======================================== */
+
+.footer {
+  background-color: var(--intel-blue-dark);
+  color: var(--light-text);
+  text-align: center;
+  padding: var(--spacing-lg) var(--spacing-md);
+  font-size: 0.95rem;
+  margin-top: var(--spacing-xl);
+  border-top: 3px solid var(--intel-blue);
+}
+
+.developer-name {
+  font-weight: 600;
+  color: #FFD700;
+  letter-spacing: 0.5px;
+}
